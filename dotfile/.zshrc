@@ -2,7 +2,8 @@
 # -----------------
 # author	: James Hawkins
 # github	: gotama
-# updated	: 19/09/19
+# updated	: 23/08/20
+# Ref : https://thevaluable.dev/zsh-install-configure/
 # -----------------
 
 # PROMPT
@@ -132,6 +133,16 @@ alias tree='find . -type d | sed -e "s/[^-][^\/]*\//  |/g" -e "s/|\([^ ]\)/|-\1/
 # Programs
 alias buildrunner="flutter packages pub run build_runner build"
 
+# -----------------
+#
+# FUNCTIONS
+#--------------------
+function workto() {
+    work; cd src/github.com/gotama/$1; lla
+}
+
+# -----------------
+#
 # CLEAN UP
 # -----------------
 unset _zsh_user_config_dir
