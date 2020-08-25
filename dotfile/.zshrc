@@ -154,14 +154,15 @@ load-nvmrc
 # Alias
 #
 # todo: gitdelete needs to be a function
+# todo: fix n go forward for macosx
 #--------------------
-alias b="cd ../; ll"
-alias n="cd /..; ll"
-alias work="cd $HOME/Documents; lla"
-alias gowork="cd $HOME/go/src/github.com/gotama/; lla"
-alias flutterwork="cd $HOME/flutter/projects; lla"
+alias b="cd ../; ls"
+alias n="cd /..; ls"
+alias work="cd $HOME/Documents; ls"
+alias gowork="cd $HOME/go/src/github.com/gotama/; ls"
+alias flutterwork="cd $HOME/flutter/projects; ls"
 alias gitdelete="echo \"https://stackoverflow.com/questions/2003505/how-do-i-delete-a-git-branch-locally-and-remotely\""
-alias home="cd $HOME; lla"
+alias home="cd $HOME; ls"
 alias grep='grep --colour=auto'
 alias egrep='egrep --colour=auto'
 alias ls='ls -G -gtTha'
