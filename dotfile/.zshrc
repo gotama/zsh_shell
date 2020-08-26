@@ -28,22 +28,6 @@ zstyle ':vcs_info:git:*' formats '%b'
 
 # -----------------
 #
-# SOURCE
-# todo: install zsh-autosuggestions
-# todo: figure out if statement and -f
-#--------------------
-if [[ -f /usr/local/share/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh ]]; then
-  source /usr/local/share/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
-fi
-
-# Linux path, migrate to osx
-#if [[ -f /usr/share/zsh/plugins/zsh-autosuggestions/zsh-autosuggestions.zsh ]]; then
-#  source /usr/share/zsh/plugins/zsh-autosuggestions/zsh-autosuggestions.zsh
-#fi
-# -----------------
-
-# -----------------
-#
 # CONFIG
 #
 # todo: research configs for zsh
@@ -81,7 +65,8 @@ fi
 # todo: add more plugins https://github.com/ohmyzsh/ohmyzsh/tree/master/plugins/web-search
 # -----------------
 #plugins=(golang)
-#source $HOME/.zshplugins/start.sh
+plugins=(zsh-syntax-highlighting zsh-autosuggestions)
+source $HOME/.zshplugins/start.sh
 
 # -----------------
 #
