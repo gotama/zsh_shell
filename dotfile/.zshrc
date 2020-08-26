@@ -7,6 +7,9 @@
 # ref       : https://thevaluable.dev/zsh-install-configure/
 # -----------------
 
+export CLICOLOR=1
+export LSCOLORS=GxBxhxFxcxhxhxhxhxGxGx
+
 # -----------------
 #
 # PROMPT
@@ -75,6 +78,7 @@ fi
 #
 # PLUGINS
 # todo: setup golang plugin
+# todo: add more plugins https://github.com/ohmyzsh/ohmyzsh/tree/master/plugins/web-search
 # -----------------
 #plugins=(golang)
 #source $HOME/.zshplugins/start.sh
@@ -155,17 +159,17 @@ load-nvmrc
 #
 # todo: gitdelete needs to be a function
 # todo: fix n go forward for macosx
+# todo: find ll and run-help aliases
+# todo: move flutter to work function
 #--------------------
-alias b="cd ../; ls"
-alias n="cd /..; ls"
-alias work="cd $HOME/Documents; ls"
-alias gowork="cd $HOME/go/src/github.com/gotama/; ls"
-alias flutterwork="cd $HOME/flutter/projects; ls"
+alias b="cd ../; ll"
+alias n="cd /..; ll"
+alias flutterwork="cd $HOME/flutter/projects; ll"
 alias gitdelete="echo \"https://stackoverflow.com/questions/2003505/how-do-i-delete-a-git-branch-locally-and-remotely\""
-alias home="cd $HOME; ls"
+alias home="cd $HOME; ll"
 alias grep='grep --colour=auto'
 alias egrep='egrep --colour=auto'
-alias ls='ls -G -gtTha'
+alias ll='ls -G -gtTha'
 alias tree='find . -type d | sed -e "s/[^-][^\/]*\//  |/g" -e "s/|\([^ ]\)/|-\1/"'
 alias buildrunner="flutter packages pub run build_runner build"
 
@@ -173,8 +177,47 @@ alias buildrunner="flutter packages pub run build_runner build"
 #
 # FUNCTIONS
 #--------------------
-function workto() {
-    work; cd src/github.com/gotama/$1; ls
+
+export WORKING_DIRECTORY="$HOME/Documents"
+export PERSONALDIR="github.com/gotama"
+export KURTOSYSDIR="github.com/kurtosys"
+export GOWORK="go/src/github.com/gotama"
+
+# $1 type of work
+# $2 the repo domain
+# $3 the repo
+# $4 the project
+function work() {
+  case $1 in
+    "personal")
+      MOVINGTO="$WORKING_DIRECTORY/$PERSONALDIR/$2"
+      printf "Moving to $MOVINGTO \n"
+      cd $MOVINGTO; ll
+      ;;
+    "kurtosys")
+      MOVINGTO="$WORKING_DIRECTORY/$KURTOSYSDIR/$2"
+      printf "Moving to $MOVINGTO \n"
+      cd $MOVINGTO; ll
+      ;;
+    "golang")
+      printf "Moving to $WORKING_DIRECTORY/$GOWORK/$2 \n"
+      cd $WORKING_DIRECTORY/$GOWORK/$2; ll
+      ;;
+    "flutter")
+      printf "Flutter work type in progress \n"
+      ;;
+    *)
+      printf "Failed parameters: $1 $2 $3 $4 \n Types of work environments: \n 1. personal \n 2. kurtosys \n 3. golang \n 4. flutter"
+      ;;
+  esac
+}
+
+function migrate() {
+  mv $WORKING_DIRECTORY/kurtosys/$1/ksys$1 $WORKING_DIRECTORY/$KURTOSYSDIR
+}
+
+function migrateloader() {
+  mv $WORKING_DIRECTORY/kurtosys/$1/ksys$1_loaders $WORKING_DIRECTORY/$KURTOSYSDIR
 }
 
 # -----------------
