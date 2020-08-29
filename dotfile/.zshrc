@@ -141,6 +141,14 @@ function workto() {
     work; cd src/github.com/gotama/$1; lla
 }
 
+function createaur() {
+    aur;
+    echo "Creating an AUR...";
+    git clone "https://aur.archlinux.org/$1.git";
+    cd $1;
+    echo "WIP: Add if statement to makepkg -si"
+}
+
 # -----------------
 #
 # CLEAN UP

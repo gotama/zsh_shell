@@ -1,5 +1,7 @@
 typeset -U path
 
+export WORKING_DIR="$HOME/Documents"
+
 path=($HOME/bin(N-/) /usr/local/sbin(N-/) /usr/local/bin(N-/) $path)
 #path=(~/.local/bin $path[@])
 
@@ -13,8 +15,8 @@ fi
 path=(${JAVA_HOME:+${JAVA_HOME}/bin}(N-/) $path)
 
 ## Android SDK ##
-if [[ -d "${HOME}/Android/Sdk" ]]; then
-    export ANDROID_HOME=${HOME}/Android/Sdk
+if [[ -d "${WORKING_DIR}/Android/Sdk" ]]; then
+    export ANDROID_HOME=${WORKING_DIR}/Android/Sdk
 fi
 if [[ -n "$ANDROID_HOME" && -d "$ANDROID_HOME" ]]; then
     path=($path ${ANDROID_HOME}/tools(N-/) ${ANDROID_HOME}/platform-tools(N-/) ${ANDROID_HOME}/build-tools/android-4.4(N-/))
@@ -24,4 +26,4 @@ if [[ -n "$ANDROID_HOME" && -d "$ANDROID_HOME" ]]; then
 fi
 
 ## GOLANG ##
-path=($HOME/go/bin $path)
+path=($WORKING_DIR/go/bin $path)
