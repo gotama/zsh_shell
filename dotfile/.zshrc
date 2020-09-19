@@ -107,8 +107,6 @@ source /usr/share/nvm/init-nvm.sh
 # Navigation
 alias b="cd ../; ll"
 alias n="cd /..; ll"
-alias work="cd ~/Documents; lla"
-alias gowork="cd ~/go/src/github.com/gotama/; lla"
 alias flutterwork="cd ~/flutter/projects; lla"
 alias unitywork="cd ~/Documents/unity; lla"
 alias aur="cd /home/data/AUR; lla"
@@ -138,8 +136,7 @@ export GOWORK="go/src/github.com/gotama"
 # $4 the project
 function work() {
   case $1 in
-  "golang")
-
+  "personal")
     MOVINGTO="$WORKING_DIRECTORY/$PERSONALDIR/$2"
     printf "Moving to $MOVINGTO \n"
     cd $MOVINGTO
