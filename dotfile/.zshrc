@@ -3,12 +3,9 @@
 # author	: James Hawkins
 # github	: gotama
 # updated	: 24/08/20
-# os        : macosx
+# os        : archlinux
 # ref       : https://thevaluable.dev/zsh-install-configure/
 # -----------------
-
-export CLICOLOR=1
-export LSCOLORS=GxBxhxFxcxhxhxhxhxGxGx
 
 # -----------------
 #
@@ -94,9 +91,9 @@ _history_ignore() {
 
     [[ ${#line} -ge 5
         && ${cmd} != "rm"
-        && ${cmd} != (l|l[sal])
-        && ${cmd} != (c|cd)
-        && ${cmd} != (m|man)
+        && ${cmd} != "ll"
+        && ${cmd} != "cd"
+        && ${cmd} != "man"
     ]]
 }
 add-zsh-hook zshaddhistory _history_ignore
@@ -147,15 +144,22 @@ load-nvmrc
 # todo: find ll and run-help aliases
 # todo: move flutter to work function
 #--------------------
+
 alias b="cd ../; ll"
 alias n="cd /..; ll"
-alias flutterwork="cd $HOME/flutter/projects; ll"
-alias gitdelete="echo \"https://stackoverflow.com/questions/2003505/how-do-i-delete-a-git-branch-locally-and-remotely\""
-alias home="cd $HOME; ll"
+alias work="cd ~/Documents; lla"
+alias gowork="cd ~/go/src/github.com/gotama/; lla"
+alias flutterwork="cd ~/flutter/projects; lla"
+alias unitywork="cd ~/Documents/unity; lla"
+alias aur="cd /home/data/AUR; lla"
+alias home="cd ~; lla"
 alias grep='grep --colour=auto'
 alias egrep='egrep --colour=auto'
-alias ll='ls -G -gtTha'
+alias ls='ls --color=auto --human-readable --group-directories-first --classify'
+alias ll='ls --color=auto --human-readable --group-directories-first --classify -l'
+alias lla='ls --color=auto --human-readable --group-directories-first --classify -la'
 alias tree='find . -type d | sed -e "s/[^-][^\/]*\//  |/g" -e "s/|\([^ ]\)/|-\1/"'
+
 alias buildrunner="flutter packages pub run build_runner build"
 
 # -----------------
