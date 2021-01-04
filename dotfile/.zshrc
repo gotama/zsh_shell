@@ -147,10 +147,6 @@ load-nvmrc
 
 alias b="cd ../; ll"
 alias n="cd /..; ll"
-alias work="cd ~/Documents; lla"
-alias gowork="cd ~/go/src/github.com/gotama/; lla"
-alias flutterwork="cd ~/flutter/projects; lla"
-alias unitywork="cd ~/Documents/unity; lla"
 alias aur="cd /home/data/AUR; lla"
 alias home="cd ~; lla"
 alias grep='grep --colour=auto'
@@ -168,45 +164,74 @@ alias buildrunner="flutter packages pub run build_runner build"
 #--------------------
 
 export WORKING_DIRECTORY="$HOME/Documents"
-export PERSONALDIR="github.com/gotama"
-export KURTOSYSDIR="github.com/kurtosys"
-export GOWORK="go/src/github.com/gotama"
+export GITHUB="github.com"
+export GITLAB="gitlab.com"
+export LOCAL_WORK="git.rundun.co.za"
 
-# $1 type of work
-# $2 the repo domain
-# $3 the repo
-# $4 the project
+# $1 repo
+# $2 organization
+# $3 project
 function work() {
   case $1 in
-    "personal")
-      MOVINGTO="$WORKING_DIRECTORY/$PERSONALDIR/$2"
+    "github")
+      MOVINGTO="$WORKING_DIRECTORY/$GITHUB/$2"
       printf "Moving to $MOVINGTO \n"
-      cd $MOVINGTO; ll
+      cd $MOVINGTO; 
+      if [ -z "$3" ]
+      then
+        lla;
+        else 
+          code ./$3;
+        fi
       ;;
-    "kurtosys")
-      MOVINGTO="$WORKING_DIRECTORY/$KURTOSYSDIR/$2"
+    "gitlab")
+      MOVINGTO="$WORKING_DIRECTORY/$GITLAB/$2"
       printf "Moving to $MOVINGTO \n"
-      cd $MOVINGTO; ll
+      cd $MOVINGTO; 
+      if [ -z "$3" ]
+      then
+        lla;
+        else 
+          code ./$3;
+        fi
       ;;
-    "golang")
-      printf "Moving to $WORKING_DIRECTORY/$GOWORK/$2 \n"
-      cd $WORKING_DIRECTORY/$GOWORK/$2; ll
+    "local")
+      printf "Moving to $WORKING_DIRECTORY/$LOCAL_WORK/$2 \n"
+      cd $WORKING_DIRECTORY/$LOCAL_WORK/$2;
+      if [ -z "$3" ]
+      then
+        lla;
+        else 
+          code ./$3;
+        fi
       ;;
     "flutter")
       printf "Flutter work type in progress \n"
       ;;
     *)
-      printf "Failed parameters: $1 $2 $3 $4 \n Types of work environments: \n 1. personal \n 2. kurtosys \n 3. golang \n 4. flutter"
+      printf "Failed parameters: $1 $2 $3 $4 \n Types of work environments: \n 1. repo \n 2. project \n 3. golang \n 4. flutter"
       ;;
   esac
 }
 
-function migrate() {
-  mv $WORKING_DIRECTORY/kurtosys/$1/ksys$1 $WORKING_DIRECTORY/$KURTOSYSDIR
+function createaur() {
+  printf "Moving to AUR... \n"
+  aur
+  printf "Creating an AUR... \n"
+  git clone "https://aur.archlinux.org/$1.git"
+  cd "$1" || return
+  makepkg si
 }
 
-function migrateloader() {
-  mv $WORKING_DIRECTORY/kurtosys/$1/ksys$1_loaders $WORKING_DIRECTORY/$KURTOSYSDIR
+function codeshell() {
+  # work github  
+  printf "Opening from zsh_shell...\n"
+  MOVINGTO="$WORKING_DIRECTORY/$GITHUB/gotama"
+  code $MOVINGTO/zsh_shell;
+}
+
+function run() {
+  $(dirname $(go list -f '{{.Target}}'))/$1 
 }
 
 # -----------------

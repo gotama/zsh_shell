@@ -13,8 +13,8 @@ fi
 path=(${JAVA_HOME:+${JAVA_HOME}/bin}(N-/) $path)
 
 ## Android SDK ##
-if [[ -d "${WORKING_DIRECTORY}/Android/Sdk" ]]; then
-    export ANDROID_HOME=${WORKING_DIRECTORY}/Android/Sdk
+if [[ -d "${HOME}/Android/Sdk" ]]; then
+    export ANDROID_HOME=${HOME}/Android/Sdk
 fi
 if [[ -n "$ANDROID_HOME" && -d "$ANDROID_HOME" ]]; then
     path=($path ${ANDROID_HOME}/tools(N-/) ${ANDROID_HOME}/platform-tools(N-/) ${ANDROID_HOME}/build-tools/android-4.4(N-/))
@@ -30,9 +30,10 @@ path=("$WORKING_DIRECTORY/go/bin" $path)
 path=("/Applications/Visual Studio Code.app/Contents/Resources/app/bin" $path)
 
 ## SOURCE KURTOSYS ENVIRONMENT ##
-if [[ -f $HOME/.kurtosysenv ]]; then
-  source $HOME/.kurtosysenv
+if [[ -f $HOME/.donenv ]]; then
+  source $HOME/.donenv
 fi
 
 export EDITOR='code -w'
 export PATH
+export GITHUB_TOKEN='8033e3a0a5ee8fd078e873f1125a6ef021e5abbe'
