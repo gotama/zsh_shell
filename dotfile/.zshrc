@@ -145,6 +145,9 @@ load-nvmrc
 # todo: move flutter to work function
 #--------------------
 
+alias mv="mv -iv"
+alias cp="cp -riv"
+alias mkdir="mkdir -vp"
 alias b="cd ../; ll"
 alias n="cd /..; ll"
 alias aur="cd /home/data/AUR; lla"
